@@ -13,16 +13,16 @@ class LinkedList:
     
     def __str__(self):
         linked_list = ""
-        if self.head == None:
+        temp = self.head
+        if temp is None:
             return "None"
         for _ in range(0, self.length+1):
-            
-            linked_list += str(self.head.value)
+            linked_list += str(temp.value)
             linked_list += "->"
-            if self.head.next == None:
+            if temp.next is None:
                 linked_list += "None"
                 return linked_list
-            self.head = self.head.next
+            temp = temp.next
         return linked_list
             
     
