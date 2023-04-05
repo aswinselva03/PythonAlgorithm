@@ -3,6 +3,10 @@ class Node:
         self.value = value
         self.next = None
     
+    def __repr__(self):
+        return str({"value":self.value,
+                    "next": self.next})
+    
     def __str__(self):
         return str({"value":self.value,
                     "next": self.next})
@@ -40,7 +44,7 @@ class LinkedList:
         else:
             self.tail.next = new_node
             self.tail = new_node
-        # increment the lenght of LL and return True(will be used in another function)
+        # increment the length of LL and return True(will be used in another function)
         self.length +=1
         return True
     
@@ -67,7 +71,40 @@ class LinkedList:
 
 
     def prepend(self, value):
-        pass
+        new_node = Node(value)
+        # if LL is empty just assign head and tail to new node
+        if self.length == 0:
+            self.head = new_node
+            self.tail = new_node
+        # else, self.head is the first node, assign self.head to new_node.next and shift self.head as new node
+        else:
+            new_node.next = self.head
+            self.head = new_node
+        self.length += 1
+        return True
+    
+    def pop_first(self):
+        if self.length == 0:
+            return None
+        # we need to return the removed element so assign temp with self.head
+        temp = self.head
+        # move head to the next node in LL
+        self.head = self.head.next
+        # detach temp by assigning temp.next = None
+        temp.next = None
+        self.length -= 1
+        if self.length == 0:
+            self.tail = None
+        return temp
+    
+    def get(self,index):
+        if index < 0 or index >= self.length:
+            return None
+        temp = self.head
+        for _ in range(index):
+            temp = temp.next
+        return temp
+
 
     def insert(self, position, value):
         pass
@@ -81,5 +118,15 @@ my_linked_list.append(2)
 print(my_linked_list)
 print("popping 2",my_linked_list.pop())
 print(my_linked_list)
-
+print("prepending 2", my_linked_list.prepend(2))
+print(my_linked_list)
+print("pop_first 2", my_linked_list.pop_first())
+print(my_linked_list)
+print("pop_first 4", my_linked_list.pop_first())
+print(my_linked_list)
+print("appending 2", my_linked_list.append(2))
+print("appending 4", my_linked_list.append(4))
+print(my_linked_list)
+print("Get index 2",my_linked_list.get(2))
+print("Get index 0",my_linked_list.get(0))
         
